@@ -1,0 +1,30 @@
+publish:
+  - github
+productName: Caffeinate
+npmRebuild: false
+files:
+  - package.json
+  - from: dist
+    to: "."
+    filter:
+      - main.js
+  - from: build/icons
+    to: "."
+    filter:
+      - icon.ico
+  - from: build/icons
+    to: icon.png
+    filter:
+      - 1024x1024.png
+extraMetadata:
+  main: main.js
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+win:
+  target:
+    - nsis
+    - portable
+linux:
+  target:
+    - AppImage

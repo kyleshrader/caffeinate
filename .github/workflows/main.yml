@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+    paths-ignore:
+      - README.md
+
+jobs:
+  windows:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: yarn --frozen-lockfile
+        working-directory: ./main
+      - run: yarn build
+        working-directory: ./main
+      - run: yarn package -p onTagOrDraft
+        working-directory: ./main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Hash
+        run: type .\main\dist\latest.yml
+
+  linux:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: yarn --frozen-lockfile
+        working-directory: ./main
+      - run: yarn build
+        working-directory: ./main
+      - run: yarn package -p onTagOrDraft
+        working-directory: ./main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Hash
+        run: cat ./main/dist/latest-linux.yml

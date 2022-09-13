@@ -1,0 +1,32 @@
+{
+    "name": "caffeinate",
+    "description": "Keep your PC awake with caffeine.",
+    "version": "1.0.0",
+    "private": true,
+    "author": {
+        "name": "Kyle Shrader"
+    },
+    "main": "dist/main.js",
+    "scripts": {
+        "dev": "node build/script.cjs",
+        "build": "tsc --noEmit && node build/script.cjs --prod",
+        "package": "electron-builder build"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/node": "^18.7.17",
+        "electron": "^20.1.3",
+        "electron-builder": "^23.3.3",
+        "electron-updater": "^5.2.1",
+        "esbuild": "^0.15.7",
+        "typescript": "^4.8.3",
+        "winston": "^3.8.2"
+    },
+    "engines": {
+        "node": ">= 16"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kyleshrader/caffeinate.git"
+    }
+}
